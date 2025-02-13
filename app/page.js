@@ -9,12 +9,15 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const fetchData = () => {
     axios
-      .get("https://myan-connect-app.myan-connect.workers.dev/api/v1/hotels", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
+      .get(
+        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/hotels",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data); // Handle the data from the API
       })
@@ -27,7 +30,7 @@ export default function Home() {
     e.preventDefault();
     axios
       .post(
-        "https://myan-connect-app.myan-connect.workers.dev/api/v1/auth/login",
+        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/auth/login",
         {
           email: email,
           password: password,
@@ -48,7 +51,7 @@ export default function Home() {
     console.log(token);
     axios
       .get(
-        "https://myan-connect-app.myan-connect.workers.dev/api/v1/auth/user",
+        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/auth/user",
         {
           headers: {
             "Content-Type": "application/json",
