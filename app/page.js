@@ -9,7 +9,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const fetchData = () => {
     axios
-      .get("http://localhost/api/v1/hotels", {
+      .get("https://myan-connect-app.myan-connect.workers.dev/api/v1/hotels", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -27,7 +27,7 @@ export default function Home() {
     e.preventDefault();
     axios
       .post(
-        "http://localhost/api/v1/auth/login",
+        "https://myan-connect-app.myan-connect.workers.dev/api/v1/auth/login",
         {
           email: email,
           password: password,
@@ -47,13 +47,16 @@ export default function Home() {
   const getUser = (token) => {
     console.log(token);
     axios
-      .get("http://localhost/api/v1/auth/user", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        "https://myan-connect-app.myan-connect.workers.dev/api/v1/auth/user",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
