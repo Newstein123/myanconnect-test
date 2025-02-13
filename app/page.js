@@ -30,7 +30,7 @@ export default function Home() {
     e.preventDefault();
     axios
       .post(
-        "http://localhost/api/v1/auth/login",
+        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/auth/login",
         {
           email: email,
           password: password,
