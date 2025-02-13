@@ -9,15 +9,12 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const fetchData = () => {
     axios
-      .get(
-        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/hotels",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      )
+      .get("http://localhost/api/v1/hotels", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
       .then((response) => {
         console.log(response.data); // Handle the data from the API
       })
@@ -30,7 +27,7 @@ export default function Home() {
     e.preventDefault();
     axios
       .post(
-        "https://reverse-proxy-myan-connect.heinminthant1999.workers.dev/api/v1/auth/login",
+        "http://localhost/api/v1/auth/login",
         {
           email: email,
           password: password,
@@ -43,10 +40,27 @@ export default function Home() {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        getUser(response.data.data.token);
       });
   };
 
+  const getUser = (token) => {
+    console.log(token);
+    axios
+      .get("http://localhost/api/v1/auth/user", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
+  };
   // Call fetchData when the component mounts
   useEffect(() => {
     fetchData();
